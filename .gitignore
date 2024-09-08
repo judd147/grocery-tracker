@@ -1,5 +1,6 @@
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 .env
+grocery-tracker-40a3b-firebase-adminsdk-p4aya-95ccbf45c4.json
 # dependencies
 node_modules/
 
