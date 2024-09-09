@@ -1,61 +1,9 @@
 #  Grocery Price Tracker
+Demo video link: https://youtu.be/TEGK52yTMwo
 
 Introducing Grocery Price Tracker: your ultimate companion for grocery shopping. Track historical prices to uncover true bargains, and receive notifications when prices drop. Plan your trips efficiently with our customizable shopping list feature. Can't find an item? Simply snap a picture and contribute its price. Effortlessly navigate through various categories and stay updated with hot deals from nearby supermarkets. With detailed product insights and an intuitive interface, making informed decisions has never been easier. Plus, your feedback ensures accurate pricing for all. Revolutionize your grocery shopping experience – download Grocery Price Tracker now!
 
-Demo video link: https://youtu.be/TEGK52yTMwo
-
 ###    Authors: Liyao Zhang, Jiawei Zhou
-###    Firebase and Google Map API setup:
-```
-  apiKey: "AIzaSyAVMvcs51ldmoFJsJ6BS8J445NdPdG3gCc"
-  authDomain: "grocery-tracker-40a3b.firebaseapp.com"
-  projectId: "grocery-tracker-40a3b"
-  storageBucket: "grocery-tracker-40a3b.appspot.com"
-  messagingSenderId: "179121607754"
-  appId: "1:179121607754:web:0b62158ca1cc7c32ac02b3"
-  GOOGLE_MAPS_API_KEY: "AIzaSyBUvWpC05hBwN4qdeW7W6PDvk9lq71Rj9M"
-```
-
-###    Firebase Rules:
-####   Firestore Database
-```
-rules_version = '2';
-
-service cloud.firestore {
-  match /databases/{database}/documents {
-
-    match /products/{document=**} {
-      allow read: if true;
-    }
-    match /prices/{document=**} {
-      allow read: if true;
-    }
-    // Allow read and write access to user info only for the authenticated users
-    match /users/{userId} {
-      allow read, write: if request.auth != null;
-      
-      // Allow read and write access to the user's shopping_list
-      match /shopping_list/{document=**} {
-        allow read, update, delete: if request.auth != null && request.auth.uid == userId;
-      	allow create: if request.auth != null;
-      }
-
-      // Allow read and write access to the user's contribution_list
-      match /contribution_list/{document=**} {
-        allow read, update, delete: if request.auth != null && request.auth.uid == userId;
-      	allow create: if request.auth != null;
-      }
-    }
-  }
-}
-```
-####   Storage:
-```
-  match /{allPaths=**} {
-      allow read;
-      allow create, write, delete;
-    }
-```
 
 ###    Data Model and Collections:
 ####   1. Users Collection (Contribution: Jiawei Zhou):
